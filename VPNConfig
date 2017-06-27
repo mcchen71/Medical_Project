@@ -1,1 +1,66 @@
+dev tun
+tls-client
 
+remote 98.253.221.169 1194
+
+# The "float" tells OpenVPN to accept authenticated packets from any address,
+# not only the address which was specified in the --remote option.
+# This is useful when you are connecting to a peer which holds a dynamic address
+# such as a dial-in user or DHCP client.
+# (Please refer to the manual of OpenVPN for more information.)
+
+#float
+
+# If redirect-gateway is enabled, the client will redirect it's
+# default network gateway through the VPN.
+# It means the VPN connection will firstly connect to the VPN Server
+# and then to the internet.
+# (Please refer to the manual of OpenVPN for more information.)
+
+redirect-gateway def1
+
+# dhcp-option DNS: To set primary domain name server address.
+# Repeat this option to set secondary DNS server addresses.
+
+dhcp-option DNS 192.168.0.10
+
+pull
+
+# If you want to connect by Server's IPv6 address, you should use
+# "proto udp6" in UDP mode or "proto tcp6-client" in TCP mode
+proto udp
+
+script-security 2
+
+
+comp-lzo
+
+reneg-sec 0
+
+cipher AES-128-CBC
+
+auth SHA1
+
+auth-user-pass
+<ca>
+-----BEGIN CERTIFICATE-----
+MIIDTTCCAragAwIBAgIJAPxmpq2N5MrCMA0GCSqGSIb3DQEBCwUAMIGnMQswCQYD
+VQQGEwJUVzEPMA0GA1UECAwGVGFpd2FuMQ8wDQYDVQQHDAZUYWlwZWkxFjAUBgNV
+BAoMDVN5bm9sb2d5IEluYy4xHjAcBgNVBAsMFUNlcnRpZmljYXRlIEF1dGhvcml0
+eTEZMBcGA1UEAwwQU3lub2xvZ3kgSW5jLiBDQTEjMCEGCSqGSIb3DQEJARYUcHJv
+ZHVjdEBzeW5vbG9neS5jb20wHhcNMTYwMzEwMTgyNTI3WhcNMzUxMTI2MTgyNTI3
+WjCBpzELMAkGA1UEBhMCVFcxDzANBgNVBAgMBlRhaXdhbjEPMA0GA1UEBwwGVGFp
+cGVpMRYwFAYDVQQKDA1TeW5vbG9neSBJbmMuMR4wHAYDVQQLDBVDZXJ0aWZpY2F0
+ZSBBdXRob3JpdHkxGTAXBgNVBAMMEFN5bm9sb2d5IEluYy4gQ0ExIzAhBgkqhkiG
+9w0BCQEWFHByb2R1Y3RAc3lub2xvZ3kuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GN
+ADCBiQKBgQC5bO9kvB+GqERCqWFRS+w9E8N4RUYM6xJm1ltbTcZaPfW5FsnNmSlJ
+UVErqmoj7OXJHykd/lsUPu8cy/yXaKfu/qpWz/jfbcW0li7cPqEwoLu6sXF8ijOl
+MGiG4HZkSrDOKuP/yfV1weeasCK0+AxfDBoDtx3nn00mYHGUZ6116QIDAQABo38w
+fTAfBgNVHREEGDAWgRRwcm9kdWN0QHN5bm9sb2d5LmNvbTAPBgNVHRMECDAGAQH/
+AgEAMDYGCWCGSAGG+EIBDQQpFidtb2Rfc3NsIGdlbmVyYXRlZCBjdXN0b20gQ0Eg
+Y2VydGlmaWNhdGUwEQYJYIZIAYb4QgEBBAQDAgIEMA0GCSqGSIb3DQEBCwUAA4GB
+AK2FjQbRZKZV27W4ECocHxWON4Ie+2cEpjubw0XoJHm7luJot60sFBWwxZzl+6m+
+3wynxdxV42z6A6RaNFwtmEfpEFR34iBaRBilY1UA/YSHx+i8NFs6QmtUyydPfDan
+uI7KNak4PGav0mvGLm0NWTY1kj2gBPnxDImRVmjyKJzK
+-----END CERTIFICATE-----
+</ca>
